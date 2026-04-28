@@ -238,88 +238,134 @@
     border-color: var(--magenta);
   }
 
-  /* ========== HERO VIDEO ========== */
+  /* ========== HERO BRAND COMPOSITION ========== */
   .hero-visual {
     position: relative;
-    aspect-ratio: 9 / 12;
-    max-width: 420px;
+    aspect-ratio: 1 / 1;
+    max-width: 500px;
     margin-left: auto;
   }
-  .hero-video-frame {
+
+  /* Orbiting rings behind everything */
+  .hero-orbit {
     position: absolute;
     inset: 0;
-    border-radius: 32px;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    animation: rotate-slow 40s linear infinite;
+  }
+  @keyframes rotate-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Sun-burst rays */
+  .hero-rays {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    animation: rays-pulse 3s ease-in-out infinite;
+  }
+  @keyframes rays-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.6; }
+    50% { transform: scale(1.05); opacity: 1; }
+  }
+
+  /* Logo sphere centerpiece */
+  .hero-logo-stage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 62%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--ink);
-    box-shadow: 12px 12px 0 var(--ink);
-    background: var(--ink);
-    transform: rotate(-2deg);
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    background: #000;
+    z-index: 4;
+    box-shadow:
+      0 25px 60px rgba(160, 0, 109, 0.35),
+      0 8px 20px rgba(0, 0, 0, 0.2),
+      inset 0 0 0 3px rgba(255, 248, 236, 0.05);
+    animation: hero-bounce 3.5s ease-in-out infinite;
   }
-  .hero-video-frame:hover {
-    transform: rotate(0deg);
-  }
-  .hero-video-frame video {
+  .hero-logo-stage video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
-  /* "PLAYING" badge */
-  .live-badge {
+  @keyframes hero-bounce {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-50%, calc(-50% - 12px)); }
+  }
+
+  /* Soft ground shadow under sphere */
+  .hero-ground {
     position: absolute;
-    top: 18px;
-    left: 18px;
-    background: var(--paper);
-    color: var(--ink);
-    padding: 6px 12px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    bottom: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 14px;
+    background: radial-gradient(ellipse, rgba(31, 31, 35, 0.25), transparent 70%);
+    z-index: 3;
+    animation: ground-pulse 3.5s ease-in-out infinite;
+  }
+  @keyframes ground-pulse {
+    0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.7; }
+    50% { transform: translateX(-50%) scaleX(0.85); opacity: 0.4; }
+  }
+
+  /* Floating laundry items */
+  .float-item {
+    position: absolute;
     z-index: 5;
-    border: 1.5px solid var(--ink);
+    width: 56px;
+    height: 56px;
+    filter: drop-shadow(2px 4px 0 rgba(31, 31, 35, 0.15));
   }
-  .live-badge::before {
-    content: "";
-    width: 8px;
-    height: 8px;
-    background: var(--orange);
-    border-radius: 50%;
-    animation: pulse 1.5s ease-in-out infinite;
+  .float-item svg {
+    width: 100%;
+    height: 100%;
   }
-  /* Decorative floating orange disc behind video */
-  .hero-deco {
-    position: absolute;
-    top: -40px;
-    right: -40px;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: var(--orange);
-    z-index: -1;
-    opacity: 0.6;
-    animation: float-disc 6s ease-in-out infinite;
+  .float-item.shirt {
+    top: 8%;
+    right: 6%;
+    width: 64px;
+    height: 64px;
+    animation: float-a 4s ease-in-out infinite;
   }
-  .hero-deco-2 {
-    position: absolute;
-    bottom: -30px;
-    left: -50px;
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    background: var(--magenta);
-    z-index: -1;
-    opacity: 0.5;
-    animation: float-disc 6s ease-in-out infinite reverse;
+  .float-item.sock {
+    bottom: 14%;
+    left: 4%;
+    width: 50px;
+    height: 50px;
+    animation: float-b 5s ease-in-out infinite;
+    animation-delay: -1s;
   }
-  @keyframes float-disc {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(15px, -15px); }
+  .float-item.star {
+    top: 14%;
+    left: 6%;
+    width: 44px;
+    height: 44px;
+    animation: float-c 4.5s ease-in-out infinite;
+    animation-delay: -2s;
+  }
+  @keyframes float-a {
+    0%, 100% { transform: translateY(0) rotate(-8deg); }
+    50% { transform: translateY(-14px) rotate(10deg); }
+  }
+  @keyframes float-b {
+    0%, 100% { transform: translateY(0) rotate(12deg); }
+    50% { transform: translateY(-12px) rotate(-8deg); }
+  }
+  @keyframes float-c {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-10px) rotate(180deg) scale(1.1); }
   }
 
   /* ========== MARQUEE ========== */
@@ -335,29 +381,31 @@
   }
   .marquee-track {
     display: flex;
-    gap: 60px;
-    animation: scroll 25s linear infinite;
+    animation: scroll 22s linear infinite;
     white-space: nowrap;
     width: max-content;
+    will-change: transform;
   }
   .marquee-item {
     font-family: 'Fraunces', serif;
     font-weight: 700;
     font-size: 28px;
     font-style: italic;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 60px;
+    padding-right: 60px;
   }
   .marquee-item::after {
     content: "●";
     color: var(--orange);
     font-style: normal;
-    font-size: 20px;
+    font-size: 16px;
+    margin-left: 60px;
+    transform: translateY(-3px);
   }
   @keyframes scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
   }
 
   /* ========== FEATURE SECTIONS ========== */
@@ -718,7 +766,7 @@
   @media (max-width: 880px) {
     .hero { padding: 40px 0 80px; }
     .hero-grid { grid-template-columns: 1fr; gap: 50px; }
-    .hero-visual { max-width: 320px; margin: 0 auto; }
+    .hero-visual { max-width: 380px; margin: 0 auto; }
     .feature { padding: 80px 0; }
     .feature-grid { grid-template-columns: 1fr; gap: 40px; }
     .feature.reverse .feature-grid { direction: ltr; }
@@ -765,14 +813,62 @@
         </div>
       </div>
       <div class="hero-visual reveal">
-        <div class="hero-deco"></div>
-        <div class="hero-deco-2"></div>
-        <div class="hero-video-frame">
-          <span class="live-badge">In motion</span>
-          <video autoplay muted loop playsinline preload="metadata">
-            <source src="media/hero.mp4" type="video/mp4">
+        <!-- Decorative orbiting rings -->
+        <svg class="hero-orbit" viewBox="0 0 500 500" aria-hidden="true">
+          <defs>
+            <linearGradient id="orbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fba100" stop-opacity="0.5"/>
+              <stop offset="100%" stop-color="#a0006d" stop-opacity="0.5"/>
+            </linearGradient>
+          </defs>
+          <circle cx="250" cy="250" r="230" fill="none" stroke="url(#orbGrad)" stroke-width="1.5" stroke-dasharray="4 8"/>
+          <circle cx="250" cy="250" r="195" fill="none" stroke="#a0006d" stroke-width="1" stroke-opacity="0.25"/>
+        </svg>
+
+        <!-- Sun-burst rays behind logo -->
+        <svg class="hero-rays" viewBox="0 0 500 500" aria-hidden="true">
+          <g stroke="#fba100" stroke-width="3" stroke-linecap="round" opacity="0.7">
+            <line x1="250" y1="40" x2="250" y2="80"/>
+            <line x1="250" y1="420" x2="250" y2="460"/>
+            <line x1="40" y1="250" x2="80" y2="250"/>
+            <line x1="420" y1="250" x2="460" y2="250"/>
+            <line x1="100" y1="100" x2="128" y2="128"/>
+            <line x1="372" y1="372" x2="400" y2="400"/>
+            <line x1="400" y1="100" x2="372" y2="128"/>
+            <line x1="128" y1="372" x2="100" y2="400"/>
+          </g>
+        </svg>
+
+        <!-- The logo sphere as hero centerpiece -->
+        <div class="hero-logo-stage">
+          <video autoplay muted loop playsinline preload="auto">
+            <source src="media/logo_big.mp4" type="video/mp4">
           </video>
         </div>
+
+        <!-- Floating laundry items -->
+        <div class="float-item shirt">
+          <svg viewBox="0 0 60 60" fill="none">
+            <path d="M15 12 L22 8 L30 14 L38 8 L45 12 L48 22 L42 24 L42 50 L18 50 L18 24 L12 22 Z"
+                  fill="#fba100" stroke="#1f1f23" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="float-item sock">
+          <svg viewBox="0 0 60 60" fill="none">
+            <path d="M22 8 L38 8 L38 28 Q38 32 35 35 L25 45 Q22 48 22 52 L22 54 L42 54 L42 52 Q42 48 39 45 L46 38 Q50 34 50 28 L50 8 Z"
+                  fill="#a0006d" stroke="#1f1f23" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="22" y1="14" x2="38" y2="14" stroke="#1f1f23" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="float-item star">
+          <svg viewBox="0 0 60 60" fill="none">
+            <path d="M30 8 L34 24 L50 26 L37 36 L42 52 L30 42 L18 52 L23 36 L10 26 L26 24 Z"
+                  fill="#fba100" stroke="#1f1f23" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Ground shadow -->
+        <div class="hero-ground"></div>
       </div>
     </div>
   </div>
@@ -883,7 +979,7 @@
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="container">
-    © 2026 Rollin' Clothin'. Made for tired laundry-doers.
+    © 2026 Rollin' Clothin'. Made with <span class="heart">●</span> for tired laundry-doers.
   </div>
 </footer>
 
