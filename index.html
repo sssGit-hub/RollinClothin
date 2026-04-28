@@ -241,9 +241,11 @@
   /* ========== HERO BRAND COMPOSITION ========== */
   .hero-visual {
     position: relative;
+    width: 100%;
     aspect-ratio: 1 / 1;
     max-width: 500px;
     margin-left: auto;
+    justify-self: end;
   }
 
   /* Orbiting rings behind everything */
@@ -381,6 +383,7 @@
   }
   .marquee-track {
     display: flex;
+    align-items: center;
     animation: scroll 22s linear infinite;
     white-space: nowrap;
     width: max-content;
@@ -391,17 +394,15 @@
     font-weight: 700;
     font-size: 28px;
     font-style: italic;
-    display: inline-flex;
-    align-items: center;
-    padding-right: 60px;
+    flex-shrink: 0;
+    padding: 0 50px;
   }
-  .marquee-item::after {
-    content: "●";
+  .marquee-dot {
     color: var(--orange);
     font-style: normal;
-    font-size: 16px;
-    margin-left: 60px;
-    transform: translateY(-3px);
+    font-size: 14px;
+    flex-shrink: 0;
+    line-height: 1;
   }
   @keyframes scroll {
     from { transform: translate3d(0, 0, 0); }
@@ -878,13 +879,21 @@
 <div class="marquee">
   <div class="marquee-track">
     <span class="marquee-item">Roll it</span>
+    <span class="marquee-dot">●</span>
     <span class="marquee-item">Throw it</span>
+    <span class="marquee-dot">●</span>
     <span class="marquee-item">Kick it</span>
+    <span class="marquee-dot">●</span>
     <span class="marquee-item">Never carry it again</span>
+    <span class="marquee-dot">●</span>
     <span class="marquee-item">Roll it</span>
+    <span class="marquee-dot">●</span>
     <span class="marquee-item">Throw it</span>
+    <span class="marquee-dot">●</span>
     <span class="marquee-item">Kick it</span>
+    <span class="marquee-dot">●</span>
     <span class="marquee-item">Never carry it again</span>
+    <span class="marquee-dot">●</span>
   </div>
 </div>
 
