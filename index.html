@@ -243,131 +243,109 @@
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    max-width: 500px;
+    max-width: 520px;
     margin-left: auto;
     justify-self: end;
   }
 
-  /* Orbiting rings behind everything */
-  .hero-orbit {
+  /* Soft glow halo behind the ball */
+  .hero-glow {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    inset: 8%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(251, 161, 0, 0.35) 0%, rgba(160, 0, 109, 0.15) 40%, transparent 70%);
     z-index: 1;
-    animation: rotate-slow 40s linear infinite;
+    animation: glow-pulse 4s ease-in-out infinite;
+    filter: blur(20px);
   }
-  @keyframes rotate-slow {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
-
-  /* Sun-burst rays */
-  .hero-rays {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    animation: rays-pulse 3s ease-in-out infinite;
-  }
-  @keyframes rays-pulse {
-    0%, 100% { transform: scale(1); opacity: 0.6; }
-    50% { transform: scale(1.05); opacity: 1; }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.7; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
   }
 
-  /* Logo sphere centerpiece */
-  .hero-logo-stage {
+  /* Water video centerpiece */
+  .hero-stage {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 62%;
+    width: 78%;
     aspect-ratio: 1;
     transform: translate(-50%, -50%);
     border-radius: 50%;
     overflow: hidden;
     background: #000;
-    z-index: 4;
+    z-index: 3;
+    border: 3px solid var(--ink);
     box-shadow:
-      0 25px 60px rgba(160, 0, 109, 0.35),
-      0 8px 20px rgba(0, 0, 0, 0.2),
-      inset 0 0 0 3px rgba(255, 248, 236, 0.05);
-    animation: hero-bounce 3.5s ease-in-out infinite;
+      0 30px 60px rgba(31, 31, 35, 0.4),
+      12px 12px 0 var(--ink);
   }
-  .hero-logo-stage video {
+  .hero-stage video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-  }
-  @keyframes hero-bounce {
-    0%, 100% { transform: translate(-50%, -50%); }
-    50% { transform: translate(-50%, calc(-50% - 12px)); }
+    transform: scale(1.1);
   }
 
-  /* Soft ground shadow under sphere */
-  .hero-ground {
+  /* Falling laundry container */
+  .laundry-rain {
     position: absolute;
-    bottom: 8%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50%;
-    height: 14px;
-    background: radial-gradient(ellipse, rgba(31, 31, 35, 0.25), transparent 70%);
-    z-index: 3;
-    animation: ground-pulse 3.5s ease-in-out infinite;
+    inset: -10% -5% 0 -5%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2;
   }
-  @keyframes ground-pulse {
-    0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.7; }
-    50% { transform: translateX(-50%) scaleX(0.85); opacity: 0.4; }
-  }
-
-  /* Floating laundry items */
-  .float-item {
-    position: absolute;
-    z-index: 5;
-    width: 56px;
-    height: 56px;
-    filter: drop-shadow(2px 4px 0 rgba(31, 31, 35, 0.15));
-  }
-  .float-item svg {
+  .laundry-rain svg {
     width: 100%;
     height: 100%;
+    overflow: visible;
   }
-  .float-item.shirt {
-    top: 8%;
-    right: 6%;
-    width: 64px;
-    height: 64px;
-    animation: float-a 4s ease-in-out infinite;
+  .falling {
+    animation-name: fall;
+    animation-timing-function: cubic-bezier(0.4, 0.05, 0.6, 1);
+    animation-iteration-count: infinite;
+    transform-origin: center;
   }
-  .float-item.sock {
-    bottom: 14%;
-    left: 4%;
-    width: 50px;
-    height: 50px;
-    animation: float-b 5s ease-in-out infinite;
-    animation-delay: -1s;
+  @keyframes fall {
+    0% {
+      transform: translateY(-120%) rotate(var(--start-rot, 0deg));
+      opacity: 0;
+    }
+    8% { opacity: 1; }
+    92% { opacity: 1; }
+    100% {
+      transform: translateY(220%) rotate(var(--end-rot, 360deg));
+      opacity: 0;
+    }
   }
-  .float-item.star {
-    top: 14%;
-    left: 6%;
-    width: 44px;
-    height: 44px;
-    animation: float-c 4.5s ease-in-out infinite;
-    animation-delay: -2s;
+
+  /* "ON LOOP" badge */
+  .hero-badge {
+    position: absolute;
+    top: 4%;
+    right: 4%;
+    background: var(--paper);
+    color: var(--ink);
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    z-index: 6;
+    border: 1.5px solid var(--ink);
   }
-  @keyframes float-a {
-    0%, 100% { transform: translateY(0) rotate(-8deg); }
-    50% { transform: translateY(-14px) rotate(10deg); }
-  }
-  @keyframes float-b {
-    0%, 100% { transform: translateY(0) rotate(12deg); }
-    50% { transform: translateY(-12px) rotate(-8deg); }
-  }
-  @keyframes float-c {
-    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
-    50% { transform: translateY(-10px) rotate(180deg) scale(1.1); }
+  .hero-badge::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: var(--orange);
+    border-radius: 50%;
+    animation: pulse 1.5s ease-in-out infinite;
   }
 
   /* ========== MARQUEE ========== */
@@ -541,16 +519,29 @@
     align-items: center;
     justify-content: center;
   }
-  .showcase-image img {
+  .showcase-image .swap-img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: contain;
     filter: drop-shadow(0 30px 60px rgba(251, 161, 0, 0.25));
-    animation: gentle-float 5s ease-in-out infinite;
   }
-  @keyframes gentle-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+  .showcase-image .swap-img.assembled {
+    animation: swap-assembled 6s ease-in-out infinite;
+  }
+  .showcase-image .swap-img.collapsed {
+    animation: swap-collapsed 6s ease-in-out infinite;
+  }
+  @keyframes swap-assembled {
+    0%, 38% { opacity: 1; transform: scale(1); }
+    50%, 88% { opacity: 0; transform: scale(0.96); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes swap-collapsed {
+    0%, 38% { opacity: 0; transform: scale(0.96); }
+    50%, 88% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.96); }
   }
 
   /* ========== STATS / FUN FACTS ========== */
@@ -814,62 +805,83 @@
         </div>
       </div>
       <div class="hero-visual reveal">
-        <!-- Decorative orbiting rings -->
-        <svg class="hero-orbit" viewBox="0 0 500 500" aria-hidden="true">
-          <defs>
-            <linearGradient id="orbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fba100" stop-opacity="0.5"/>
-              <stop offset="100%" stop-color="#a0006d" stop-opacity="0.5"/>
-            </linearGradient>
-          </defs>
-          <circle cx="250" cy="250" r="230" fill="none" stroke="url(#orbGrad)" stroke-width="1.5" stroke-dasharray="4 8"/>
-          <circle cx="250" cy="250" r="195" fill="none" stroke="#a0006d" stroke-width="1" stroke-opacity="0.25"/>
-        </svg>
+        <!-- Soft glow halo -->
+        <div class="hero-glow"></div>
 
-        <!-- Sun-burst rays behind logo -->
-        <svg class="hero-rays" viewBox="0 0 500 500" aria-hidden="true">
-          <g stroke="#fba100" stroke-width="3" stroke-linecap="round" opacity="0.7">
-            <line x1="250" y1="40" x2="250" y2="80"/>
-            <line x1="250" y1="420" x2="250" y2="460"/>
-            <line x1="40" y1="250" x2="80" y2="250"/>
-            <line x1="420" y1="250" x2="460" y2="250"/>
-            <line x1="100" y1="100" x2="128" y2="128"/>
-            <line x1="372" y1="372" x2="400" y2="400"/>
-            <line x1="400" y1="100" x2="372" y2="128"/>
-            <line x1="128" y1="372" x2="100" y2="400"/>
-          </g>
-        </svg>
+        <!-- Falling laundry animation -->
+        <div class="laundry-rain">
+          <svg viewBox="0 0 500 500" preserveAspectRatio="none" aria-hidden="true">
+            <!-- Shirt 1 -->
+            <g class="falling" style="--start-rot: -20deg; --end-rot: 380deg; animation-duration: 5.2s; animation-delay: 0s;">
+              <g transform="translate(60 0)">
+                <path d="M-22 -18 L-12 -22 L0 -16 L12 -22 L22 -18 L26 -6 L18 -3 L18 22 L-18 22 L-18 -3 L-26 -6 Z"
+                      fill="#fba100" stroke="#1f1f23" stroke-width="3" stroke-linejoin="round"/>
+              </g>
+            </g>
+            <!-- Sock -->
+            <g class="falling" style="--start-rot: 30deg; --end-rot: -340deg; animation-duration: 6.4s; animation-delay: -1.2s;">
+              <g transform="translate(150 0)">
+                <path d="M-9 -18 L9 -18 L9 4 Q9 8 6 11 L-3 20 Q-7 24 -7 28 L7 28 Q11 28 11 26 L18 18 Q22 14 22 8 L22 -18 Z"
+                      fill="#a0006d" stroke="#1f1f23" stroke-width="3" stroke-linejoin="round"/>
+                <line x1="-9" y1="-12" x2="9" y2="-12" stroke="#1f1f23" stroke-width="2.5"/>
+              </g>
+            </g>
+            <!-- Star (sparkle) -->
+            <g class="falling" style="--start-rot: 0deg; --end-rot: 720deg; animation-duration: 4.8s; animation-delay: -2.5s;">
+              <g transform="translate(250 0)">
+                <path d="M0 -18 L4 -4 L18 -2 L7 6 L11 20 L0 11 L-11 20 L-7 6 L-18 -2 L-4 -4 Z"
+                      fill="#fba100" stroke="#1f1f23" stroke-width="3" stroke-linejoin="round"/>
+              </g>
+            </g>
+            <!-- Pants -->
+            <g class="falling" style="--start-rot: -10deg; --end-rot: 360deg; animation-duration: 6.8s; animation-delay: -3.5s;">
+              <g transform="translate(360 0)">
+                <path d="M-16 -18 L16 -18 L18 -4 L13 22 L4 22 L0 -2 L-4 22 L-13 22 L-18 -4 Z"
+                      fill="#1f1f23" stroke="#1f1f23" stroke-width="3" stroke-linejoin="round"/>
+                <line x1="-16" y1="-12" x2="16" y2="-12" stroke="#fba100" stroke-width="2"/>
+              </g>
+            </g>
+            <!-- Shirt 2 (smaller, tinted) -->
+            <g class="falling" style="--start-rot: 15deg; --end-rot: -350deg; animation-duration: 5.8s; animation-delay: -4s;">
+              <g transform="translate(440 0) scale(0.7)">
+                <path d="M-22 -18 L-12 -22 L0 -16 L12 -22 L22 -18 L26 -6 L18 -3 L18 22 L-18 22 L-18 -3 L-26 -6 Z"
+                      fill="#a0006d" stroke="#1f1f23" stroke-width="3.5" stroke-linejoin="round"/>
+              </g>
+            </g>
+            <!-- Sock 2 -->
+            <g class="falling" style="--start-rot: -45deg; --end-rot: 320deg; animation-duration: 5.5s; animation-delay: -1.8s;">
+              <g transform="translate(95 0) scale(0.85)">
+                <path d="M-9 -18 L9 -18 L9 4 Q9 8 6 11 L-3 20 Q-7 24 -7 28 L7 28 Q11 28 11 26 L18 18 Q22 14 22 8 L22 -18 Z"
+                      fill="#fba100" stroke="#1f1f23" stroke-width="3" stroke-linejoin="round"/>
+                <line x1="-9" y1="-12" x2="9" y2="-12" stroke="#1f1f23" stroke-width="2.5"/>
+              </g>
+            </g>
+            <!-- Tiny star -->
+            <g class="falling" style="--start-rot: 0deg; --end-rot: 540deg; animation-duration: 4.2s; animation-delay: -3s;">
+              <g transform="translate(310 0) scale(0.6)">
+                <path d="M0 -18 L4 -4 L18 -2 L7 6 L11 20 L0 11 L-11 20 L-7 6 L-18 -2 L-4 -4 Z"
+                      fill="#a0006d" stroke="#1f1f23" stroke-width="3.5" stroke-linejoin="round"/>
+              </g>
+            </g>
+            <!-- Shirt 3 -->
+            <g class="falling" style="--start-rot: 25deg; --end-rot: -360deg; animation-duration: 6s; animation-delay: -0.5s;">
+              <g transform="translate(200 0) scale(0.75)">
+                <path d="M-22 -18 L-12 -22 L0 -16 L12 -22 L22 -18 L26 -6 L18 -3 L18 22 L-18 22 L-18 -3 L-26 -6 Z"
+                      fill="#fba100" stroke="#1f1f23" stroke-width="3.5" stroke-linejoin="round"/>
+              </g>
+            </g>
+          </svg>
+        </div>
 
-        <!-- The logo sphere as hero centerpiece -->
-        <div class="hero-logo-stage">
+        <!-- Live badge -->
+        <span class="hero-badge">On Loop</span>
+
+        <!-- Water video centerpiece -->
+        <div class="hero-stage">
           <video autoplay muted loop playsinline preload="auto">
-            <source src="media/logo_big.mp4" type="video/mp4">
+            <source src="media/water.mp4" type="video/mp4">
           </video>
         </div>
-
-        <!-- Floating laundry items -->
-        <div class="float-item shirt">
-          <svg viewBox="0 0 60 60" fill="none">
-            <path d="M15 12 L22 8 L30 14 L38 8 L45 12 L48 22 L42 24 L42 50 L18 50 L18 24 L12 22 Z"
-                  fill="#fba100" stroke="#1f1f23" stroke-width="2.5" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="float-item sock">
-          <svg viewBox="0 0 60 60" fill="none">
-            <path d="M22 8 L38 8 L38 28 Q38 32 35 35 L25 45 Q22 48 22 52 L22 54 L42 54 L42 52 Q42 48 39 45 L46 38 Q50 34 50 28 L50 8 Z"
-                  fill="#a0006d" stroke="#1f1f23" stroke-width="2.5" stroke-linejoin="round"/>
-            <line x1="22" y1="14" x2="38" y2="14" stroke="#1f1f23" stroke-width="2"/>
-          </svg>
-        </div>
-        <div class="float-item star">
-          <svg viewBox="0 0 60 60" fill="none">
-            <path d="M30 8 L34 24 L50 26 L37 36 L42 52 L30 42 L18 52 L23 36 L10 26 L26 24 Z"
-                  fill="#fba100" stroke="#1f1f23" stroke-width="2.5" stroke-linejoin="round"/>
-          </svg>
-        </div>
-
-        <!-- Ground shadow -->
-        <div class="hero-ground"></div>
       </div>
     </div>
   </div>
@@ -915,12 +927,28 @@
   </div>
 </section>
 
-<!-- ============ FEATURE 2: EASY TO CLEAN ============ -->
+<!-- ============ FEATURE 2: HOLDS A FULL LOAD ============ -->
 <section class="feature reverse">
   <div class="container">
     <div class="feature-grid">
       <div class="reveal">
-        <span class="feature-tag">02 — Hygiene</span>
+        <span class="feature-tag">02 — Capacity</span>
+        <h2>Holds a full load <em>(and then some).</em></h2>
+        <p>Fits a complete king‑size sheet set and a comforter, all in one roll.</p>
+      </div>
+      <div class="visual-tile reveal">
+        <img src="media/capacity.jpg" alt="Rollin' Clothin' filled with laundry, parked next to an open washing machine" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 3: EASY TO CLEAN ============ -->
+<section class="feature">
+  <div class="container">
+    <div class="feature-grid">
+      <div class="reveal">
+        <span class="feature-tag">03 — Hygiene</span>
         <h2>Easy <em>to clean.</em></h2>
         <p>Rollin' Clothin' features a wipeable plastic exterior and a removable, washable fabric liner that zips securely back into place.</p>
       </div>
@@ -933,17 +961,18 @@
   </div>
 </section>
 
-<!-- ============ FEATURE 3: STRONG / DARK SHOWCASE ============ -->
+<!-- ============ FEATURE 4: STRONG / DARK SHOWCASE ============ -->
 <section class="showcase">
   <div class="container">
     <div class="feature-grid">
       <div class="reveal">
-        <span class="feature-tag">03 — Smart structure</span>
+        <span class="feature-tag">04 — Smart structure</span>
         <h2>Strong when you need it.<br /><em>Gone when you don't.</em></h2>
         <p>An internal structural frame gives Rollin' Clothin' its stability and smooth roll during use, then collapses flat so it can be easily stored or tucked away when not in use.</p>
       </div>
       <div class="showcase-image reveal">
-        <img src="media/ball.jpg" alt="Rollin' Clothin' product showing zipper and internal structure" />
+        <img class="swap-img assembled" src="media/ball_assembled.jpg" alt="Rollin' Clothin' fully assembled" />
+        <img class="swap-img collapsed" src="media/ball_collapsed.jpg" alt="Rollin' Clothin' collapsed flat for storage" />
       </div>
     </div>
   </div>
