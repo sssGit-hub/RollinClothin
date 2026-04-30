@@ -265,34 +265,6 @@
     transform: translate(8px, 8px);
   }
 
-  /* Tiny brand chip in top-left corner */
-  .hero-chip {
-    position: absolute;
-    top: -12px;
-    left: 18px;
-    background: var(--ink);
-    color: var(--paper);
-    padding: 8px 16px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    z-index: 5;
-    border: 2px solid var(--ink);
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-  }
-  .hero-chip::before {
-    content: "";
-    width: 7px;
-    height: 7px;
-    background: var(--orange);
-    border-radius: 50%;
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-
   /* Video stage - shows full 16:9 frame, no cropping */
   .hero-stage {
     position: relative;
@@ -314,36 +286,6 @@
     height: 100%;
     object-fit: cover;
     display: block;
-  }
-
-  /* Subtle bottom caption strip */
-  .hero-caption {
-    position: relative;
-    margin-top: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    z-index: 4;
-  }
-  .hero-caption-text {
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-    font-weight: 600;
-    font-size: 16px;
-    color: var(--ink);
-  }
-  .hero-caption-text .accent-dot {
-    color: var(--magenta);
-    font-style: normal;
-    margin: 0 6px;
-  }
-  .hero-caption-meta {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
   }
 
   /* ========== MARQUEE ========== */
@@ -803,15 +745,10 @@
         </div>
       </div>
       <div class="hero-visual reveal">
-        <span class="hero-chip">Live</span>
         <div class="hero-stage">
           <video autoplay muted loop playsinline preload="auto">
             <source src="media/water.mp4" type="video/mp4">
           </video>
-        </div>
-        <div class="hero-caption">
-          <span class="hero-caption-text">Built tough <span class="accent-dot">●</span> meant to move</span>
-          <span class="hero-caption-meta">RC—01</span>
         </div>
       </div>
     </div>
