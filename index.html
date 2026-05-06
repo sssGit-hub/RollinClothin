@@ -918,7 +918,7 @@
     <div class="signup-card reveal">
       <span class="signup-eyebrow">We're launching soon</span>
       <h2>Be first to <em>roll.</em></h2>
-      <p class="signup-sub">Drop your email and we'll send you straight to the Kickstarter the moment we go live. Early backers get the best deal.</p>
+      <p class="signup-sub">Drop your email and we'll send you the Kickstarter link the moment we go live. Early backers get the best deal.</p>
       <form class="signup-form" id="signup-form" novalidate>
         <input type="email" id="email-input" placeholder="your@email.com" required aria-label="Email address" />
         <button type="submit" id="submit-btn">Notify me →</button>
@@ -948,9 +948,7 @@
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
   /* ===== Email signup ===== */
-  // ⬇️ CONFIG: replace these two values when you have them
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/YOUR_FORMSPREE_ID"; // see instructions
-  const KICKSTARTER_URL = "https://www.kickstarter.com/projects/YOUR_PROJECT"; // your prelaunch URL
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xbdwkyjy";
 
   const form = document.getElementById('signup-form');
   const input = document.getElementById('email-input');
@@ -985,8 +983,10 @@
 
       if (res.ok) {
         msg.classList.add('success');
-        msg.textContent = "You're in! Redirecting to Kickstarter...";
-        setTimeout(() => { window.location.href = KICKSTARTER_URL; }, 1200);
+        msg.textContent = "You're in! We'll email you the moment we launch.";
+        input.disabled = true;
+        input.value = '';
+        btn.textContent = '✓ Subscribed';
       } else {
         throw new Error('Submission failed');
       }
