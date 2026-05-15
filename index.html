@@ -728,6 +728,201 @@
     position: relative;
     z-index: 2;
   }
+  footer .patent {
+    color: var(--ink-soft);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  footer .footer-divider {
+    margin: 0 8px;
+    color: var(--line);
+  }
+  footer .footer-link {
+    color: var(--magenta);
+    text-decoration: underline;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0;
+    transition: color 0.2s;
+  }
+  footer .footer-link:hover {
+    color: var(--orange);
+  }
+
+  /* ========== CONTACT MODAL ========== */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(31, 31, 35, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+  .modal-backdrop.open {
+    display: flex;
+    opacity: 1;
+  }
+  .modal-card {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    border-radius: 28px;
+    padding: 48px 40px 40px;
+    box-shadow: 12px 12px 0 var(--ink);
+    width: 100%;
+    max-width: 520px;
+    position: relative;
+    transform: translateY(20px) scale(0.96);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+  }
+  .modal-backdrop.open .modal-card {
+    transform: translateY(0) scale(1);
+  }
+  .modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    background: var(--cream);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    font-family: inherit;
+    line-height: 1;
+    transition: background 0.2s, transform 0.3s;
+  }
+  .modal-close:hover {
+    background: var(--orange);
+    transform: rotate(90deg);
+  }
+  .modal-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--magenta);
+    background: rgba(160, 0, 109, 0.08);
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 18px;
+  }
+  .modal-eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--magenta);
+  }
+  .modal-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 900;
+    font-size: 38px;
+    line-height: 1;
+    letter-spacing: -0.025em;
+    margin: 0 0 12px;
+    color: var(--ink);
+  }
+  .modal-card h3 em {
+    color: var(--orange);
+    font-style: italic;
+    font-weight: 700;
+  }
+  .modal-card p.modal-sub {
+    margin: 0 0 28px;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+  .modal-card .field {
+    margin-bottom: 14px;
+  }
+  .modal-card label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .modal-card input,
+  .modal-card textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--ink);
+    border-radius: 14px;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    resize: none;
+    transition: box-shadow 0.15s;
+  }
+  .modal-card input:focus,
+  .modal-card textarea:focus {
+    box-shadow: 0 0 0 3px var(--orange);
+  }
+  .modal-card textarea {
+    min-height: 110px;
+    line-height: 1.5;
+  }
+  .modal-card button[type="submit"] {
+    width: 100%;
+    margin-top: 10px;
+    padding: 16px;
+    border-radius: 100px;
+    border: 2px solid var(--ink);
+    background: var(--orange);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 16px;
+    font-family: inherit;
+    cursor: pointer;
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .modal-card button[type="submit"]:hover:not(:disabled) {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--ink);
+  }
+  .modal-card button[type="submit"]:active:not(:disabled) {
+    transform: translate(1px, 1px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .modal-card button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  .modal-message {
+    margin-top: 16px;
+    font-size: 14px;
+    min-height: 20px;
+    text-align: center;
+  }
+  .modal-message.success { color: var(--magenta); font-weight: 600; }
+  .modal-message.error { color: #b3001b; font-weight: 600; }
 
   /* ========== REVEAL ANIMATIONS ========== */
   .reveal {
@@ -755,6 +950,12 @@
     .signup-form { flex-direction: column; }
     .signup-form input, .signup-form button { width: 100%; min-width: unset; }
     .marquee-item { font-size: 22px; }
+    footer .footer-divider { display: block; margin: 4px 0; visibility: hidden; height: 0; }
+  }
+
+  @media (max-width: 540px) {
+    .modal-card { padding: 40px 24px 28px; }
+    .modal-card h3 { font-size: 30px; }
   }
 </style>
 </head>
@@ -948,8 +1149,38 @@
 <footer>
   <div class="container">
     © 2026 Rollin' Clothin'. Made for tired laundry-doers.
+    <span class="footer-divider">·</span>
+    <span class="patent">Patent Pending</span>
+    <span class="footer-divider">·</span>
+    <button type="button" class="footer-link" id="contact-link">Contact us</button>
   </div>
 </footer>
+
+<!-- ============ CONTACT MODAL ============ -->
+<div class="modal-backdrop" id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-title">
+  <div class="modal-card">
+    <button class="modal-close" id="modal-close" aria-label="Close" type="button">×</button>
+    <span class="modal-eyebrow">Get in touch</span>
+    <h3 id="contact-title">Got a <em>question?</em></h3>
+    <p class="modal-sub">Drop us a note — we'll get back to you within a day or two.</p>
+    <form id="contact-form" novalidate>
+      <div class="field">
+        <label for="contact-name">Your name</label>
+        <input type="text" id="contact-name" name="name" required autocomplete="name" />
+      </div>
+      <div class="field">
+        <label for="contact-email">Email</label>
+        <input type="email" id="contact-email" name="email" required autocomplete="email" />
+      </div>
+      <div class="field">
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" required></textarea>
+      </div>
+      <button type="submit" id="contact-submit">Send message →</button>
+      <div class="modal-message" id="contact-msg"></div>
+    </form>
+  </div>
+</div>
 
 <script>
   /* ===== Reveal-on-scroll ===== */
@@ -1011,6 +1242,104 @@
       msg.textContent = "Something went wrong. Please try again.";
       btn.disabled = false;
       btn.textContent = 'Notify me →';
+    }
+  });
+
+  /* ===== Contact modal ===== */
+  const CONTACT_FORMSPREE_ENDPOINT = "https://formspree.io/f/mojrgwez";
+
+  const contactLink = document.getElementById('contact-link');
+  const contactModal = document.getElementById('contact-modal');
+  const modalCloseBtn = document.getElementById('modal-close');
+  const contactForm = document.getElementById('contact-form');
+  const contactNameInput = document.getElementById('contact-name');
+  const contactEmailInput = document.getElementById('contact-email');
+  const contactMsgInput = document.getElementById('contact-message');
+  const contactSubmitBtn = document.getElementById('contact-submit');
+  const contactStatus = document.getElementById('contact-msg');
+
+  function openContactModal() {
+    contactModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => contactNameInput.focus(), 250);
+  }
+
+  function closeContactModal() {
+    contactModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  contactLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    openContactModal();
+  });
+  modalCloseBtn.addEventListener('click', closeContactModal);
+  contactModal.addEventListener('click', (e) => {
+    if (e.target === contactModal) closeContactModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && contactModal.classList.contains('open')) {
+      closeContactModal();
+    }
+  });
+
+  contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    contactStatus.className = 'modal-message';
+    contactStatus.textContent = '';
+
+    const name = contactNameInput.value.trim();
+    const email = contactEmailInput.value.trim();
+    const message = contactMsgInput.value.trim();
+
+    if (!name || !email || !message) {
+      contactStatus.classList.add('error');
+      contactStatus.textContent = 'Please fill in all fields.';
+      return;
+    }
+    if (!isValidEmail(email)) {
+      contactStatus.classList.add('error');
+      contactStatus.textContent = "Hmm, that email doesn't look right.";
+      return;
+    }
+
+    contactSubmitBtn.disabled = true;
+    contactSubmitBtn.textContent = 'Sending...';
+
+    try {
+      const res = await fetch(CONTACT_FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          message: message,
+          source: "Rollin' Clothin' contact form"
+        })
+      });
+
+      if (res.ok) {
+        contactStatus.classList.add('success');
+        contactStatus.textContent = "Thanks! We'll be in touch soon.";
+        contactForm.reset();
+        contactSubmitBtn.textContent = '✓ Sent';
+        setTimeout(() => {
+          closeContactModal();
+          setTimeout(() => {
+            contactSubmitBtn.disabled = false;
+            contactSubmitBtn.textContent = 'Send message →';
+            contactStatus.textContent = '';
+            contactStatus.className = 'modal-message';
+          }, 400);
+        }, 1800);
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (err) {
+      contactStatus.classList.add('error');
+      contactStatus.textContent = 'Something went wrong. Please try again.';
+      contactSubmitBtn.disabled = false;
+      contactSubmitBtn.textContent = 'Send message →';
     }
   });
 </script>
