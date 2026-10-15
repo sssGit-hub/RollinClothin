@@ -533,6 +533,37 @@
     100% { opacity: 0; transform: scale(0.96); }
   }
 
+  /* ========== MOCKUP VIDEO (vertical phone-style frame) ========== */
+  .mockup-frame {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+    aspect-ratio: 9 / 16;
+    border-radius: 28px;
+    border: 2px solid var(--ink);
+    box-shadow: var(--shadow-pop);
+    overflow: hidden;
+    background: var(--ink);
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+  }
+  .mockup-frame:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0 var(--ink);
+  }
+  .mockup-frame video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .feature p.fine-print {
+    font-size: 14px;
+    color: var(--ink-soft);
+    opacity: 0.75;
+    margin-top: 16px;
+  }
+
   /* ========== STATS / FUN FACTS ========== */
   .stats {
     background: var(--cream);
@@ -1104,6 +1135,27 @@
       <div class="showcase-image reveal">
         <img class="swap-img assembled" src="media/ball_assembled.jpg" alt="Rollin' Clothin' fully assembled" />
         <img class="swap-img collapsed" src="media/ball_collapsed.jpg" alt="Rollin' Clothin' collapsed flat for storage" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEATURE 5: MOCKUP VIDEO ============ -->
+<section class="feature reverse">
+  <div class="container">
+    <div class="feature-grid">
+      <div class="reveal">
+        <span class="feature-tag">05 — Early mockup</span>
+        <h2>See it <em>roll for real.</em></h2>
+        <p>A first look at our early mockup, rolling across the floor.</p>
+        <p class="fine-print">Final design and materials will differ.</p>
+      </div>
+      <div class="reveal">
+        <div class="mockup-frame">
+          <video autoplay muted loop playsinline preload="metadata" poster="media/mockup_poster.jpg">
+            <source src="media/mockup.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
     </div>
   </div>
